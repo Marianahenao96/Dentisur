@@ -1,0 +1,158 @@
+.formulario-cita-section {
+  width: 100%;
+  padding: 13rem 0 4rem;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f0f7fc 0%, #f8f9fa 100%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.formulario-cita-section .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.formulario-cita-card {
+  width: 100%;
+  max-width: 560px;
+  margin: 2rem 0 0;
+  flex-shrink: 0;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(74, 144, 226, 0.08);
+  border: 1px solid rgba(74, 144, 226, 0.12);
+}
+
+.formulario-cita-title {
+  font-size: 1.75rem;
+  color: #2C5F8D;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+}
+
+.formulario-cita-intro {
+  font-size: 0.95rem;
+  color: #5a6c7d;
+  margin: 0 0 2rem;
+  line-height: 1.6;
+  max-width: 100%;
+}
+
+.formulario-cita-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-row label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2C5F8D;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(74, 144, 226, 0.25);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: #4A90E2;
+}
+
+.form-row textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-row-half {
+  width: 100%;
+}
+
+.form-mensaje {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.form-mensaje.ok {
+  background: rgba(127, 211, 184, 0.2);
+  color: #1a6b52;
+  border: 1px solid rgba(127, 211, 184, 0.5);
+}
+
+.form-mensaje.error {
+  background: rgba(220, 53, 69, 0.08);
+  color: #b02a37;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.formulario-cita-submit {
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #4A90E2 0%, #7FD3B8 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 0.5rem;
+}
+
+.formulario-cita-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(74, 144, 226, 0.4);
+}
+
+.formulario-cita-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.form-row-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 600px) {
+  .form-row-group {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .form-row-half {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .formulario-cita-card {
+    padding: 1.5rem;
+  }
+  .formulario-cita-title {
+    font-size: 1.4rem;
+  }
+}

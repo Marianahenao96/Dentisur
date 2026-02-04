@@ -1,0 +1,124 @@
+.fotos {
+  padding: 6rem 0;
+  background: white;
+}
+
+.fotos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+@media (max-width: 900px) {
+  .fotos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.foto-item {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.foto-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.foto-image-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #E8F4F8 0%, #F0F9F5 100%);
+}
+
+.foto-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+  display: block;
+  min-height: 100%;
+}
+
+.foto-item:hover .foto-image {
+  transform: scale(1.1);
+}
+
+.foto-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #4A90E2 0%, #7FD3B8 100%);
+  font-size: 4rem;
+  opacity: 0.5;
+}
+
+.foto-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(44, 95, 141, 0.9), transparent);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.foto-item:hover .foto-overlay {
+  opacity: 1;
+}
+
+.foto-title {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 480px) {
+  .fotos {
+    padding: 3rem 0;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .fotos-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .foto-image-container {
+    height: 200px;
+  }
+
+  .foto-title {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .fotos-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .foto-image-container {
+    height: 250px;
+  }
+}
+
+

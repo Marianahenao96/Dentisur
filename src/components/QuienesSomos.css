@@ -1,0 +1,445 @@
+.quienes-somos {
+  padding: 6rem 0;
+  background: white;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: #2C5F8D;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.title-underline {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #4A90E2, #7FD3B8);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.quienes-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.intro-box {
+  background: linear-gradient(135deg, #E8F4F8 0%, #F0F9F5 100%);
+  padding: 2.5rem;
+  border-radius: 15px;
+  margin-bottom: 3rem;
+  border-left: 5px solid #4A90E2;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.intro-text {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+.intro-text strong {
+  color: #2C5F8D;
+  font-weight: 600;
+}
+
+.specialties {
+  margin-bottom: 3rem;
+}
+
+.specialties h3 {
+  font-size: 1.8rem;
+  color: #2C5F8D;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.specialties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.specialty-item {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.specialty-item:hover {
+  transform: translateY(-5px);
+  border-color: #7FD3B8;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+}
+
+.specialty-icon {
+  font-size: 2rem;
+}
+
+.specialty-item span:last-child {
+  font-weight: 500;
+  color: #333;
+  font-size: 1rem;
+}
+
+.doctor-info {
+  margin-top: 3rem;
+}
+
+.doctor-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  padding: 3rem;
+  border-radius: 20px;
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.doctor-avatar {
+  flex-shrink: 0;
+  width: 160px;
+  height: 160px;
+  background: linear-gradient(135deg, #4A90E2, #7FD3B8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  box-shadow: 0 5px 20px rgba(74, 144, 226, 0.3);
+}
+
+.doctor-avatar-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.doctor-details h3 {
+  font-size: 2rem;
+  color: #2C5F8D;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.doctor-title {
+  color: #7FD3B8;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.doctor-description {
+  color: #666;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.mission-vision-values {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.mvv-section-title {
+  font-size: 2rem;
+  color: #2C5F8D;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.mvv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.mvv-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(74, 144, 226, 0.08);
+  border: 1px solid rgba(74, 144, 226, 0.12);
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mvv-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.mision-card::before {
+  background: linear-gradient(90deg, #4A90E2 0%, #7FD3B8 100%);
+}
+
+.vision-card::before {
+  background: linear-gradient(90deg, #7FD3B8 0%, #4A90E2 100%);
+}
+
+.valores-card::before {
+  background: linear-gradient(90deg, #2C5F8D 0%, #4A90E2 100%);
+}
+
+.mvv-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(74, 144, 226, 0.18);
+  border-color: rgba(74, 144, 226, 0.2);
+}
+
+.mvv-card:hover::before {
+  opacity: 1;
+}
+
+.mvv-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, rgba(74, 144, 226, 0.1) 0%, rgba(127, 211, 184, 0.12) 100%);
+  border-radius: 20px;
+  padding: 12px;
+}
+
+.mvv-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.mision-icon-image {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(186deg) brightness(98%) contrast(97%);
+}
+
+.vision-icon-image {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(82%) sepia(35%) saturate(1200%) hue-rotate(115deg) brightness(98%) contrast(92%);
+}
+
+.valores-icon-image {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(28%) sepia(95%) saturate(2500%) hue-rotate(195deg) brightness(95%) contrast(95%);
+}
+
+.mvv-card h3 {
+  font-size: 1.5rem;
+  color: #2C5F8D;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.mvv-card p {
+  color: #5a6c7d;
+  line-height: 1.75;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.valores-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.valores-list li {
+  padding: 0.8rem 0;
+  color: #666;
+  line-height: 1.7;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+}
+
+.valores-list li:last-child {
+  border-bottom: none;
+}
+
+.valores-list li strong {
+  color: #2C5F8D;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+@media (max-width: 480px) {
+  .quienes-somos {
+    padding: 3rem 0;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .intro-box {
+    padding: 1.2rem;
+  }
+
+  .intro-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .mvv-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .mvv-card {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .mvv-icon {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 1rem;
+    padding: 10px;
+  }
+
+  .mision-icon-image,
+  .vision-icon-image,
+  .valores-icon-image {
+    width: 46px;
+    height: 46px;
+  }
+
+  .mvv-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .mvv-card p {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .valores-list li {
+    font-size: 0.85rem;
+    padding: 0.6rem 0;
+  }
+
+  .doctor-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .doctor-avatar {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+  }
+
+  .doctor-details h3 {
+    font-size: 1.5rem;
+  }
+
+  .doctor-title {
+    font-size: 1rem;
+  }
+
+  .doctor-description {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .intro-box {
+    padding: 1.5rem;
+  }
+
+  .intro-text {
+    font-size: 1rem;
+  }
+
+  .specialties-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doctor-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .doctor-avatar {
+    width: 130px;
+    height: 130px;
+    font-size: 3rem;
+  }
+
+  .mvv-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .mvv-card {
+    padding: 2rem;
+  }
+
+  .mvv-icon {
+    width: 76px;
+    height: 76px;
+  }
+
+  .mision-icon-image,
+  .vision-icon-image,
+  .valores-icon-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  .mvv-card p {
+    text-align: center;
+  }
+
+  .valores-list {
+    text-align: left;
+  }
+}
+
+

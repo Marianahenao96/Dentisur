@@ -1,0 +1,183 @@
+import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import logoImage from '../assets/images/logo.jpeg'
+import instagramIcon from '../assets/images/instagram-icon.png'
+
+const Navbar = ({ activeSection, scrollToSection }) => {
+  const router = useRouter()
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isServicesOpen, setIsServicesOpen] = useState(false)
+
+  // Cerrar dropdown cuando cambia la ruta
+  useEffect(() => {
+    setIsServicesOpen(false)
+  }, [router.pathname])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const servicios = [
+    { id: 'ortodoncia', label: 'Ortodoncia', path: '/servicios/ortodoncia' },
+    { id: 'blanqueamiento', label: 'Blanqueamiento Dental', path: '/servicios/blanqueamiento' },
+    { id: 'diseno-sonrisa', label: 'Diseño de Sonrisa', path: '/servicios/diseno-sonrisa' },
+    { id: 'implantes', label: 'Implantes Dentales', path: '/servicios/implantes' },
+    { id: 'endodoncia', label: 'Endodoncia', path: '/servicios/endodoncia' },
+    { id: 'periodoncia', label: 'Periodoncia', path: '/servicios/periodoncia' },
+    { id: 'profilaxis', label: 'Profilaxis Dental', path: '/servicios/profilaxis' }
+  ]
+
+  const menuItems = [
+    { id: 'inicio', label: 'INICIO' },
+    { id: 'quienes-somos', label: 'QUIÉNES SOMOS' },
+    { id: 'servicios', label: 'SERVICIOS', hasDropdown: true },
+    { id: 'fotos', label: 'FOTOS' },
+    { id: 'ubicacion', label: 'DONDE ESTAMOS' },
+    { id: 'paquetes', label: 'PAQUETES INTERNACIONALES' }
+  ]
+
+  const handleMenuClick = (sectionId) => {
+    setIsMobileMenuOpen(false)
+    
+    // Si no estamos en la página principal, navegar primero a /
+    if (router.pathname !== '/') {
+      router.push('/').then(() => {
+        setTimeout(() => {
+          const element = document.getElementById(sectionId)
+          if (element) {
+            const offset = 140
+            const elementPosition = element.getBoundingClientRect().top
+            const offsetPosition = elementPosition + window.pageYOffset - offset
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            })
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }
+        }, 300)
+      })
+    } else {
+      // Si ya estamos en la página principal, hacer scroll directamente
+      scrollToSection(sectionId)
+    }
+  }
+
+  const handleLogoClick = (e) => {
+    if (router.pathname === '/') {
+      e.preventDefault()
+      scrollToSection('inicio')
+    }
+  }
+
+  return (
+    <>
+      {/* Top Bar */}
+      <div className="top-bar">
+        <div className="top-bar-container">
+          <div className="top-bar-left">
+          </div>
+          <div className="top-bar-right">
+            <div className="social-icons">
+              <a 
+                href="https://www.instagram.com/dentisur8" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Instagram" 
+                className="social-icon instagram-icon"
+              >
+                <img src={typeof instagramIcon === 'string' ? instagramIcon : (instagramIcon?.src || '')} alt="Instagram" className="instagram-icon-image" />
+              </a>
+            </div>
+            <div className="language-selector">
+              <img src="/images/language-selector.png" alt="Selector de idioma" className="language-image" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Navigation */}
+      <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="navbar-container">
+          <div className="navbar-left">
+            <Link href="/" className="navbar-logo" onClick={handleLogoClick} aria-label="Ir al inicio">
+              <img src={typeof logoImage === 'string' ? logoImage : (logoImage?.src || '')} alt="Dentisur Logo" className="logo-image" />
+            </Link>
+          </div>
+          
+          <div className={`navbar-menu ${isMobileMenuOpen ? 'active' : ''}`}>
+            {menuItems.map((item) => (
+              <div 
+                key={item.id} 
+                className={`navbar-item-wrapper ${item.hasDropdown ? 'has-dropdown' : ''}`}
+                onMouseEnter={() => item.hasDropdown && setIsServicesOpen(true)}
+                onMouseLeave={() => item.hasDropdown && setIsServicesOpen(false)}
+              >
+                <a
+                  href={item.hasDropdown ? '#' : `#${item.id}`}
+                  className={`navbar-link ${activeSection === item.id ? 'active' : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    if (!item.hasDropdown) {
+                      handleMenuClick(item.id)
+                      // Actualizar la URL con el hash
+                      if (router.pathname === '/') {
+                        window.history.pushState(null, '', `#${item.id}`)
+                      }
+                    } else {
+                      setIsServicesOpen(!isServicesOpen)
+                    }
+                  }}
+                >
+                  {item.label}
+                  {item.hasDropdown && <span className="dropdown-arrow">▼</span>}
+                </a>
+                {item.hasDropdown && (
+                  <div className={`services-dropdown ${isServicesOpen ? 'open' : ''}`}>
+                    {servicios.map((servicio) => {
+                      const linkHref = typeof servicio.path === 'string' ? servicio.path : `/servicios/${String(servicio.id)}`
+                      return (
+                        <Link
+                          key={servicio.id}
+                          href={linkHref}
+                          className="dropdown-item"
+                          prefetch={false}
+                          onClick={() => {
+                            setIsServicesOpen(false)
+                            setIsMobileMenuOpen(false)
+                          }}
+                        >
+                          {servicio.label}
+                        </Link>
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <button
+            className="mobile-menu-toggle"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </nav>
+    </>
+  )
+}
+
+export default Navbar
+
+
