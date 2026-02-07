@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Al publicar el sitio, reemplaza tudominio.com por tu dominio real
-Sitemap: https://tudominio.com/sitemap.xml
+Sitemap: https://dentisur.site/sitemap.xml

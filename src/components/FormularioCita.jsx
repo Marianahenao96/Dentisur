@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3003'
+// URL del endpoint: Firebase (NEXT_PUBLIC_AGENDAR_CITA_URL) o NestJS local (/citas/agendar)
+const AGENDAR_URL =
+  process.env.NEXT_PUBLIC_AGENDAR_CITA_URL ||
+  `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3003'}/citas/agendar`
 
 const SERVICIOS_OPTIONS = [
   'Consulta general',
@@ -38,7 +41,7 @@ export default function FormularioCita() {
     setEnviando(true)
     setRespuesta(null)
     try {
-      const res = await fetch(`${API_URL}/citas/agendar`, {
+      const res = await fetch(AGENDAR_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

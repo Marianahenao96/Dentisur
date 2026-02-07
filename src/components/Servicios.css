@@ -119,7 +119,7 @@
   color: white;
 }
 
-/* Específico para las tarjetas de la grilla (evita que ServicioDetalle.css lo sobrescriba) */
+/* Padding de tarjetas: selector específico para que no lo sobrescriba ServicioDetalle.css */
 .servicios-grid .servicio-card .servicio-content {
   padding: 2rem 2.5rem;
   flex-grow: 1;

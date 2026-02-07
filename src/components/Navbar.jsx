@@ -10,7 +10,6 @@ const Navbar = ({ activeSection, scrollToSection }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
 
-  // Cerrar dropdown cuando cambia la ruta
   useEffect(() => {
     setIsServicesOpen(false)
   }, [router.pathname])
@@ -45,7 +44,6 @@ const Navbar = ({ activeSection, scrollToSection }) => {
   const handleMenuClick = (sectionId) => {
     setIsMobileMenuOpen(false)
     
-    // Si no estamos en la página principal, navegar primero a /
     if (router.pathname !== '/') {
       router.push('/').then(() => {
         setTimeout(() => {
@@ -64,7 +62,6 @@ const Navbar = ({ activeSection, scrollToSection }) => {
         }, 300)
       })
     } else {
-      // Si ya estamos en la página principal, hacer scroll directamente
       scrollToSection(sectionId)
     }
   }
@@ -78,7 +75,6 @@ const Navbar = ({ activeSection, scrollToSection }) => {
 
   return (
     <>
-      {/* Top Bar */}
       <div className="top-bar">
         <div className="top-bar-container">
           <div className="top-bar-left">
@@ -102,7 +98,6 @@ const Navbar = ({ activeSection, scrollToSection }) => {
         </div>
       </div>
 
-      {/* Main Navigation */}
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="navbar-container">
           <div className="navbar-left">
@@ -126,7 +121,6 @@ const Navbar = ({ activeSection, scrollToSection }) => {
                     e.preventDefault()
                     if (!item.hasDropdown) {
                       handleMenuClick(item.id)
-                      // Actualizar la URL con el hash
                       if (router.pathname === '/') {
                         window.history.pushState(null, '', `#${item.id}`)
                       }

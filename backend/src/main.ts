@@ -27,8 +27,8 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   });
-  const port = 3003;
+  const port = process.env.PORT || 3003;
   await app.listen(port);
-  console.log(`Backend Dentisur corriendo en http://localhost:${port}`);
+  console.log(`Backend Dentisur corriendo en puerto ${port}`);
 }
 bootstrap();

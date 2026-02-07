@@ -275,7 +275,6 @@ const ServicioDetalle = () => {
   const isProfilaxis = servicioId === 'profilaxis'
   const hasIconImage = servicio.iconImage
   
-  // Seleccionar la imagen del hero según el servicio (rutas estáticas desde public/images)
   const getHeroImage = () => {
     if (isBlanqueamiento) return '/images/blanqueamiento-hero.png'
     if (isDisenoSonrisa) return '/images/diseno-sonrisa-hero.png'

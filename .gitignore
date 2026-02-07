@@ -20,6 +20,8 @@ out
 .env.test.local
 .env.production.local
 backend/dist
+functions/node_modules
+.firebase/
 
 npm-debug.log*
 yarn-debug.log*

@@ -1,6 +1,6 @@
 # Dentisur - Página Web Odontológica
 
-Página web profesional para el consultorio odontológico Dentisur, desarrollada con React.js y Vite.
+Página web profesional para el consultorio odontológico Dentisur, desarrollada con Next.js y React.
 
 ## Características
 
@@ -30,9 +30,8 @@ npm run build
 
 ## Tecnologías Utilizadas
 
+- Next.js 14
 - React 18
-- Vite
-- React Router DOM
 - CSS3
 - Google Fonts (Poppins)
 
@@ -41,26 +40,26 @@ npm run build
 ```
 dentisur/
 ├── src/
-│   ├── components/
-│   │   ├── Navbar.jsx
-│   │   ├── Inicio.jsx
-│   │   ├── QuienesSomos.jsx
-│   │   ├── Servicios.jsx
-│   │   ├── Fotos.jsx
-│   │   ├── Ubicacion.jsx
-│   │   ├── PaquetesInternacionales.jsx
-│   │   └── WhatsAppButton.jsx
-│   ├── App.jsx
+│   ├── components/     (Navbar, Inicio, Servicios, Fotos, Ubicacion, etc.)
+│   ├── pages/         (_app.js, index.js, agendar-cita.js, servicios/[servicioId].js)
+│   ├── assets/images/
 │   ├── App.css
-│   ├── main.jsx
 │   └── index.css
-├── index.html
-├── package.json
-└── vite.config.js
+├── public/             (images, robots.txt, sitemap.xml)
+├── backend/            (NestJS, API citas)
+├── functions/          (Firebase Cloud Functions, agendarCita)
+├── next.config.js
+├── firebase.json
+└── package.json
 ```
+
+## Backend y formulario de citas
+
+- **Local:** backend NestJS en `backend/` (puerto 3003). Ver `backend/README.md`.
+- **Producción (Firebase):** el backend puede desplegarse en Firebase Cloud Functions. Ver **[FIREBASE-DEPLOY.md](./FIREBASE-DEPLOY.md)** para configurar Firebase y la URL de la función en Vercel (`NEXT_PUBLIC_AGENDAR_CITA_URL`).
 
 ## Contacto
 
-WhatsApp: +57 310 498 2128
+WhatsApp: +57 319 399 7118 (debe coincidir con el número en `WhatsAppButton.jsx`, `Inicio.jsx`, `Servicios.jsx`, `PaquetesInternacionales.jsx`)
 
 

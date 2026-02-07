@@ -42,7 +42,7 @@
   -webkit-transform: translateZ(0);
 }
 
-/* Endodoncia: centrar la imagen para que se vea más la muela */
+/* Endodoncia: centrar imagen del hero */
 .endodoncia-hero .hero-bg-image.endodoncia-hero-image {
   object-position: center 25%;
   object-fit: cover;
@@ -114,7 +114,7 @@
 }
 
 .diseno-sonrisa-icon {
-  /* Mantener los colores originales del logo de Diseño de Sonrisa */
+  /* Logo Diseño de Sonrisa: sin filtro para conservar colores */
   filter: none !important;
 }
 
