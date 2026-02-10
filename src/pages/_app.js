@@ -83,7 +83,7 @@ function MyApp({ Component, pageProps }) {
     <div className="App">
       <Head>
         <title>Dentisur - Odontología de Excelencia</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
         <meta name="description" content="Dentisur Dr. Rafael Valencia - Consultorio odontológico en Envigado. Ortodoncia, blanqueamiento, diseño de sonrisa, implantes, endodoncia y más. Agenda tu cita." />
         <meta name="keywords" content="dentista Envigado, odontología, ortodoncia, blanqueamiento dental, diseño de sonrisa, implantes dentales, Dentisur" />
         <meta property="og:type" content="website" />

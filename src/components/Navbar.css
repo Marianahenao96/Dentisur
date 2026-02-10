@@ -1,4 +1,4 @@
-/* Barra superior */
+/* Barra superior: espacio seguro para notch/barra de estado en móvil */
 .top-bar {
   position: fixed;
   top: 0;
@@ -6,6 +6,7 @@
   right: 0;
   background: #B8D4E3;
   padding: 0.5rem 0;
+  padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
   z-index: 1001;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -117,6 +118,7 @@
   z-index: 1000;
   transition: all 0.3s ease;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding-top: env(safe-area-inset-top, 0);
 }
 
 .navbar.scrolled {
@@ -377,10 +379,13 @@
 @media (max-width: 768px) {
   .top-bar {
     position: relative;
+    padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
   }
 
+  /* Bajar todo el navbar para que el logo no quede cortado por la barra del navegador o el notch */
   .navbar {
-    top: 0;
+    top: max(2.5rem, env(safe-area-inset-top, 0px));
+    padding-top: 0.5rem;
   }
 
   .mobile-menu-toggle {
