@@ -55,8 +55,10 @@ dentisur/
 
 ## Backend y formulario de citas
 
-- **Local:** backend NestJS en `backend/` (puerto 3003). Ver `backend/README.md`.
-- **Producción (Firebase):** el backend puede desplegarse en Firebase Cloud Functions. Ver **[FIREBASE-DEPLOY.md](./FIREBASE-DEPLOY.md)** para configurar Firebase y la URL de la función en Vercel (`NEXT_PUBLIC_AGENDAR_CITA_URL`).
+- **Opción recomendada (sin costo extra):** El proyecto incluye una ruta API en Next.js (`/api/agendar-cita`) que envía el correo. En **Vercel** solo necesitas configurar las variables SMTP (ver `.env.example`). El formulario usará esta ruta por defecto y funcionará en PC y móviles.
+- **Local con API integrada:** `npm run dev` y el formulario llama a `/api/agendar-cita`. Crea `.env.local` con las variables de `.env.example` (o `SKIP_EMAIL=true` para probar sin enviar correo).
+- **Backend NestJS (opcional):** En `backend/` para desarrollo local en puerto 3003. Ver `backend/README.md`.
+- **Firebase (opcional, plan de pago):** Ver **[FIREBASE-DEPLOY.md](./FIREBASE-DEPLOY.md)**.
 
 ## Contacto
 

@@ -1,9 +1,16 @@
 import React, { useState } from 'react'
 
-// URL del endpoint: Firebase (NEXT_PUBLIC_AGENDAR_CITA_URL) o NestJS local (/citas/agendar)
-const AGENDAR_URL =
-  process.env.NEXT_PUBLIC_AGENDAR_CITA_URL ||
-  `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3003'}/citas/agendar`
+// En el navegador: si hay URL externa (Firebase/Railway) se usa; si no, API del mismo dominio (funciona en móviles).
+function getAgendarUrl() {
+  if (typeof window !== 'undefined') {
+    const external = process.env.NEXT_PUBLIC_AGENDAR_CITA_URL ||
+      (process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/citas/agendar` : '')
+    if (external) return external
+    return `${window.location.origin}/api/agendar-cita`
+  }
+  return process.env.NEXT_PUBLIC_AGENDAR_CITA_URL ||
+    (process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/citas/agendar` : '/api/agendar-cita')
+}
 
 const SERVICIOS_OPTIONS = [
   'Consulta general',
@@ -41,7 +48,7 @@ export default function FormularioCita() {
     setEnviando(true)
     setRespuesta(null)
     try {
-      const res = await fetch(AGENDAR_URL, {
+      const res = await fetch(getAgendarUrl(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -60,7 +67,7 @@ export default function FormularioCita() {
         try {
           data = JSON.parse(text)
         } catch {
-          setRespuesta({ ok: false, mensaje: 'El servidor respondió con un formato inesperado. Comprueba que el backend esté en marcha en el puerto 3003.' })
+          setRespuesta({ ok: false, mensaje: 'El servidor respondió con un formato inesperado. Intenta de nuevo.' })
           return
         }
       }
@@ -72,7 +79,7 @@ export default function FormularioCita() {
         setRespuesta({ ok: false, mensaje })
       }
     } catch (err) {
-      setRespuesta({ ok: false, mensaje: 'Error de conexión. Verifica que el backend esté en marcha (puerto 3003).' })
+      setRespuesta({ ok: false, mensaje: 'No se pudo conectar. Revisa tu internet e intenta de nuevo, o contáctanos por WhatsApp.' })
     } finally {
       setEnviando(false)
     }
