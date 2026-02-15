@@ -25,13 +25,13 @@ const Navbar = ({ activeSection, scrollToSection }) => {
   }, [])
 
   const servicios = [
-    { id: 'ortodoncia', label: 'Ortodoncia', path: '/servicios/ortodoncia' },
-    { id: 'blanqueamiento', label: 'Blanqueamiento Dental', path: '/servicios/blanqueamiento' },
-    { id: 'diseno-sonrisa', label: 'Diseño de Sonrisa', path: '/servicios/diseno-sonrisa' },
-    { id: 'implantes', label: 'Implantes Dentales', path: '/servicios/implantes' },
-    { id: 'endodoncia', label: 'Endodoncia', path: '/servicios/endodoncia' },
-    { id: 'periodoncia', label: 'Periodoncia', path: '/servicios/periodoncia' },
-    { id: 'profilaxis', label: 'Profilaxis Dental', path: '/servicios/profilaxis' }
+    { id: 'ortodoncia', labelKey: 'serviciosNav.ortodoncia', path: '/servicios/ortodoncia' },
+    { id: 'blanqueamiento', labelKey: 'serviciosNav.blanqueamiento', path: '/servicios/blanqueamiento' },
+    { id: 'diseno-sonrisa', labelKey: 'serviciosNav.disenoSonrisa', path: '/servicios/diseno-sonrisa' },
+    { id: 'implantes', labelKey: 'serviciosNav.implantes', path: '/servicios/implantes' },
+    { id: 'endodoncia', labelKey: 'serviciosNav.endodoncia', path: '/servicios/endodoncia' },
+    { id: 'periodoncia', labelKey: 'serviciosNav.periodoncia', path: '/servicios/periodoncia' },
+    { id: 'profilaxis', labelKey: 'serviciosNav.profilaxis', path: '/servicios/profilaxis' }
   ]
 
   const menuItems = [
