@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
+import { useLanguage } from '../context/LanguageContext'
 
-// En el navegador: si hay URL externa (Firebase/Railway) se usa; si no, API del mismo dominio (funciona en móviles).
 function getAgendarUrl() {
   if (typeof window !== 'undefined') {
     const external = process.env.NEXT_PUBLIC_AGENDAR_CITA_URL ||
@@ -12,19 +12,10 @@ function getAgendarUrl() {
     (process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/citas/agendar` : '/api/agendar-cita')
 }
 
-const SERVICIOS_OPTIONS = [
-  'Consulta general',
-  'Ortodoncia',
-  'Blanqueamiento Dental',
-  'Diseño de Sonrisa',
-  'Implantes Dentales',
-  'Endodoncia',
-  'Periodoncia',
-  'Profilaxis Dental',
-  'Otro'
-]
+const SERVICIOS_KEYS = ['formServicios.consulta', 'formServicios.ortodoncia', 'formServicios.blanqueamiento', 'formServicios.disenoSonrisa', 'formServicios.implantes', 'formServicios.endodoncia', 'formServicios.periodoncia', 'formServicios.profilaxis', 'formServicios.otro']
 
 export default function FormularioCita() {
+  const { t } = useLanguage()
   const [form, setForm] = useState({
     nombre: '',
     email: '',
@@ -67,19 +58,20 @@ export default function FormularioCita() {
         try {
           data = JSON.parse(text)
         } catch {
-          setRespuesta({ ok: false, mensaje: 'El servidor respondió con un formato inesperado. Intenta de nuevo.' })
+          setRespuesta({ ok: false, mensaje: t('formulario.errorFormato') })
           return
         }
       }
       if (res.ok && data?.ok) {
-        setRespuesta(data)
+        setRespuesta({ ok: true, mensaje: t('formulario.exito') })
         setForm({ nombre: '', email: '', telefono: '', fecha: '', hora: '', servicio: '', mensaje: '' })
       } else {
-        const mensaje = data?.mensaje || data?.message || (Array.isArray(data?.message) ? data.message.join(', ') : 'No se pudo enviar. Intenta de nuevo.')
+        const raw = data?.mensaje || data?.message || (Array.isArray(data?.message) ? data.message.join(', ') : '')
+        const mensaje = raw && API_ERROR_KEYS[raw] ? t(API_ERROR_KEYS[raw]) : (raw || t('formulario.errorEnvio'))
         setRespuesta({ ok: false, mensaje })
       }
     } catch (err) {
-      setRespuesta({ ok: false, mensaje: 'No se pudo conectar. Revisa tu internet e intenta de nuevo, o contáctanos por WhatsApp.' })
+      setRespuesta({ ok: false, mensaje: t('formulario.errorConexion') })
     } finally {
       setEnviando(false)
     }
@@ -89,11 +81,11 @@ export default function FormularioCita() {
     <section className="formulario-cita-section">
       <div className="container">
         <div className="formulario-cita-card">
-          <h2 className="formulario-cita-title">Solicitar cita</h2>
-          <p className="formulario-cita-intro">Completa los datos a continuación. Nuestro equipo revisará tu solicitud y te contactará a la brevedad para confirmar tu cita.</p>
+          <h2 className="formulario-cita-title">{t('formulario.title')}</h2>
+          <p className="formulario-cita-intro">{t('formulario.intro')}</p>
           <form onSubmit={handleSubmit} className="formulario-cita-form">
             <div className="form-row">
-              <label htmlFor="nombre">Nombre completo *</label>
+              <label htmlFor="nombre">{t('formulario.nombre')}</label>
               <input
                 id="nombre"
                 name="nombre"
@@ -101,11 +93,11 @@ export default function FormularioCita() {
                 required
                 value={form.nombre}
                 onChange={handleChange}
-                placeholder="Tu nombre"
+                placeholder={t('formulario.nombrePlaceholder')}
               />
             </div>
             <div className="form-row">
-              <label htmlFor="email">Correo electrónico *</label>
+              <label htmlFor="email">{t('formulario.email')}</label>
               <input
                 id="email"
                 name="email"
@@ -113,11 +105,11 @@ export default function FormularioCita() {
                 required
                 value={form.email}
                 onChange={handleChange}
-                placeholder="tu@correo.com"
+                placeholder={t('formulario.emailPlaceholder')}
               />
             </div>
             <div className="form-row">
-              <label htmlFor="telefono">Teléfono / WhatsApp *</label>
+              <label htmlFor="telefono">{t('formulario.telefono')}</label>
               <input
                 id="telefono"
                 name="telefono"
@@ -125,12 +117,12 @@ export default function FormularioCita() {
                 required
                 value={form.telefono}
                 onChange={handleChange}
-                placeholder="+57 300 123 4567"
+                placeholder={t('formulario.telefonoPlaceholder')}
               />
             </div>
             <div className="form-row-group">
               <div className="form-row form-row-half">
-                <label htmlFor="fecha">Fecha deseada *</label>
+                <label htmlFor="fecha">{t('formulario.fecha')}</label>
                 <input
                   id="fecha"
                   name="fecha"
@@ -141,7 +133,7 @@ export default function FormularioCita() {
                 />
               </div>
               <div className="form-row form-row-half">
-                <label htmlFor="hora">Hora preferida</label>
+                <label htmlFor="hora">{t('formulario.hora')}</label>
                 <input
                   id="hora"
                   name="hora"
@@ -152,28 +144,28 @@ export default function FormularioCita() {
               </div>
             </div>
             <div className="form-row">
-              <label htmlFor="servicio">Servicio de interés</label>
+              <label htmlFor="servicio">{t('formulario.servicio')}</label>
               <select
                 id="servicio"
                 name="servicio"
                 value={form.servicio}
                 onChange={handleChange}
               >
-                <option value="">Selecciona un servicio</option>
-                {SERVICIOS_OPTIONS.map(s => (
-                  <option key={s} value={s}>{s}</option>
+                <option value="">{t('formulario.servicioPlaceholder')}</option>
+                {SERVICIOS_KEYS.map(key => (
+                  <option key={key} value={t(key)}>{t(key)}</option>
                 ))}
               </select>
             </div>
             <div className="form-row">
-              <label htmlFor="mensaje">Mensaje adicional</label>
+              <label htmlFor="mensaje">{t('formulario.mensaje')}</label>
               <textarea
                 id="mensaje"
                 name="mensaje"
                 rows={3}
                 value={form.mensaje}
                 onChange={handleChange}
-                placeholder="Indica motivo de consulta o comentarios..."
+                placeholder={t('formulario.mensajePlaceholder')}
               />
             </div>
             {respuesta && (
@@ -182,7 +174,7 @@ export default function FormularioCita() {
               </div>
             )}
             <button type="submit" className="formulario-cita-submit" disabled={enviando}>
-              {enviando ? 'Enviando...' : 'Enviar solicitud de cita'}
+              {enviando ? t('formulario.enviando') : t('formulario.enviar')}
             </button>
           </form>
         </div>

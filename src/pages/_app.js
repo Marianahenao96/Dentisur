@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import { LanguageProvider } from '../context/LanguageContext'
 import Navbar from '../components/Navbar'
 import WhatsAppButton from '../components/WhatsAppButton'
 import '../index.css'
@@ -80,6 +81,7 @@ function MyApp({ Component, pageProps }) {
   }
 
   return (
+    <LanguageProvider>
     <div className="App">
       <Head>
         <title>Dentisur - Odontología de Excelencia</title>
@@ -95,6 +97,7 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
       <WhatsAppButton />
     </div>
+    </LanguageProvider>
   )
 }
 

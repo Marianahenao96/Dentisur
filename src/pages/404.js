@@ -1,12 +1,14 @@
 import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function NotFound() {
+  const { t } = useLanguage()
   return (
     <>
       <Head>
-        <title>Página no encontrada - Dentisur</title>
+        <title>{t('notFound.title')} - Dentisur</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <div style={{
@@ -18,8 +20,8 @@ export default function NotFound() {
         padding: '2rem',
         textAlign: 'center'
       }}>
-        <h1 style={{ fontSize: '1.5rem', color: '#2C5F8D', marginBottom: '0.5rem' }}>Página no encontrada</h1>
-        <p style={{ color: '#5a6c7d', marginBottom: '1.5rem' }}>La ruta que buscas no existe.</p>
+        <h1 style={{ fontSize: '1.5rem', color: '#2C5F8D', marginBottom: '0.5rem' }}>{t('notFound.title')}</h1>
+        <p style={{ color: '#5a6c7d', marginBottom: '1.5rem' }}>{t('notFound.message')}</p>
         <Link
           href="/"
           style={{
@@ -32,7 +34,7 @@ export default function NotFound() {
             fontWeight: 600
           }}
         >
-          Volver al inicio
+          {t('notFound.back')}
         </Link>
       </div>
     </>

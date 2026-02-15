@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useLanguage } from '../context/LanguageContext'
 import logoImage from '../assets/images/logo.jpeg'
 import instagramIcon from '../assets/images/instagram-icon.png'
 
 const Navbar = ({ activeSection, scrollToSection }) => {
   const router = useRouter()
+  const { language, setLanguage, t } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
@@ -33,12 +35,12 @@ const Navbar = ({ activeSection, scrollToSection }) => {
   ]
 
   const menuItems = [
-    { id: 'inicio', label: 'INICIO' },
-    { id: 'quienes-somos', label: 'QUIÉNES SOMOS' },
-    { id: 'servicios', label: 'SERVICIOS', hasDropdown: true },
-    { id: 'fotos', label: 'FOTOS' },
-    { id: 'ubicacion', label: 'DONDE ESTAMOS' },
-    { id: 'paquetes', label: 'PAQUETES INTERNACIONALES' }
+    { id: 'inicio', labelKey: 'nav.inicio' },
+    { id: 'quienes-somos', labelKey: 'nav.quienesSomos' },
+    { id: 'servicios', labelKey: 'nav.servicios', hasDropdown: true },
+    { id: 'fotos', labelKey: 'nav.fotos' },
+    { id: 'ubicacion', labelKey: 'nav.ubicacion' },
+    { id: 'paquetes', labelKey: 'nav.paquetes' }
   ]
 
   const handleMenuClick = (sectionId) => {
@@ -91,8 +93,10 @@ const Navbar = ({ activeSection, scrollToSection }) => {
                 <img src={typeof instagramIcon === 'string' ? instagramIcon : (instagramIcon?.src || '')} alt="Instagram" className="instagram-icon-image" />
               </a>
             </div>
-            <div className="language-selector">
-              <img src="/images/language-selector.png" alt="Selector de idioma" className="language-image" />
+            <div className="language-selector" role="group" aria-label={t('nav.language')}>
+              <button type="button" className={`language-btn ${language === 'es' ? 'active' : ''}`} onClick={() => setLanguage('es')} aria-pressed={language === 'es'}>ES</button>
+              <span className="language-sep">|</span>
+              <button type="button" className={`language-btn ${language === 'en' ? 'active' : ''}`} onClick={() => setLanguage('en')} aria-pressed={language === 'en'}>EN</button>
             </div>
           </div>
         </div>
@@ -117,6 +121,7 @@ const Navbar = ({ activeSection, scrollToSection }) => {
                 <a
                   href={item.hasDropdown ? '#' : `#${item.id}`}
                   className={`navbar-link ${activeSection === item.id ? 'active' : ''}`}
+                  aria-label={t(item.labelKey)}
                   onClick={(e) => {
                     e.preventDefault()
                     if (!item.hasDropdown) {
@@ -129,7 +134,7 @@ const Navbar = ({ activeSection, scrollToSection }) => {
                     }
                   }}
                 >
-                  {item.label}
+                  {t(item.labelKey)}
                   {item.hasDropdown && <span className="dropdown-arrow">▼</span>}
                 </a>
                 {item.hasDropdown && (
@@ -147,7 +152,7 @@ const Navbar = ({ activeSection, scrollToSection }) => {
                             setIsMobileMenuOpen(false)
                           }}
                         >
-                          {servicio.label}
+                          {t(servicio.labelKey)}
                         </Link>
                       )
                     })}

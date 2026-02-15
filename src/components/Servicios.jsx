@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { useLanguage } from '../context/LanguageContext'
 import servicioHeroImage from '../assets/images/servicio-hero.png'
 import blanqueamientoHeroImage from '../assets/images/blanqueamiento-hero.png'
 import disenoSonrisaHeroImage from '../assets/images/diseno-sonrisa-hero.png'
@@ -9,68 +10,24 @@ import periodonciaHeroImage from '../assets/images/periodoncia-hero.png'
 import profilaxisHeroImage from '../assets/images/profilaxis-hero.png'
 
 const Servicios = () => {
+  const { t } = useLanguage()
   const servicios = [
-    {
-      id: 'ortodoncia',
-      title: 'Ortodoncia',
-      description: 'Corrección de la posición de los dientes y la mordida con aparatos ortodóncicos. Sonrisa alineada y mordida saludable.',
-      path: '/servicios/ortodoncia',
-      image: servicioHeroImage
-    },
-    {
-      id: 'blanqueamiento',
-      title: 'Blanqueamiento Dental',
-      description: 'Aclara el color de los dientes y elimina manchas para una sonrisa más brillante y natural.',
-      path: '/servicios/blanqueamiento',
-      image: blanqueamientoHeroImage
-    },
-    {
-      id: 'diseno-sonrisa',
-      title: 'Diseño de Sonrisa',
-      description: 'Sonrisa personalizada que se adapta a tu rostro y personalidad. Estética y armonía facial.',
-      path: '/servicios/diseno-sonrisa',
-      image: disenoSonrisaHeroImage
-    },
-    {
-      id: 'implantes',
-      title: 'Implantes Dentales',
-      description: 'Reemplazo de dientes perdidos con raíces de titanio. Resultados naturales y duraderos.',
-      path: '/servicios/implantes',
-      image: implantesHeroImage
-    },
-    {
-      id: 'endodoncia',
-      title: 'Endodoncia',
-      description: 'Tratamiento de conducto que salva el diente eliminando la pulpa infectada.',
-      path: '/servicios/endodoncia',
-      image: endodonciaHeroImage
-    },
-    {
-      id: 'periodoncia',
-      title: 'Periodoncia',
-      description: 'Tratamiento de encías y tejidos de soporte. Gingivitis y periodontitis.',
-      path: '/servicios/periodoncia',
-      image: periodonciaHeroImage
-    },
-    {
-      id: 'profilaxis',
-      title: 'Profilaxis Dental',
-      description: 'Limpieza profesional: placa, sarro y manchas. Salud bucal y prevención.',
-      path: '/servicios/profilaxis',
-      image: profilaxisHeroImage
-    }
+    { id: 'ortodoncia', titleKey: 'servicios.ortodoncia', descKey: 'servicios.ortodonciaDesc', path: '/servicios/ortodoncia', image: servicioHeroImage },
+    { id: 'blanqueamiento', titleKey: 'servicios.blanqueamiento', descKey: 'servicios.blanqueamientoDesc', path: '/servicios/blanqueamiento', image: blanqueamientoHeroImage },
+    { id: 'diseno-sonrisa', titleKey: 'servicios.disenoSonrisa', descKey: 'servicios.disenoSonrisaDesc', path: '/servicios/diseno-sonrisa', image: disenoSonrisaHeroImage },
+    { id: 'implantes', titleKey: 'servicios.implantes', descKey: 'servicios.implantesDesc', path: '/servicios/implantes', image: implantesHeroImage },
+    { id: 'endodoncia', titleKey: 'servicios.endodoncia', descKey: 'servicios.endodonciaDesc', path: '/servicios/endodoncia', image: endodonciaHeroImage },
+    { id: 'periodoncia', titleKey: 'servicios.periodoncia', descKey: 'servicios.periodonciaDesc', path: '/servicios/periodoncia', image: periodonciaHeroImage },
+    { id: 'profilaxis', titleKey: 'servicios.profilaxis', descKey: 'servicios.profilaxisDesc', path: '/servicios/profilaxis', image: profilaxisHeroImage }
   ]
 
   return (
     <section id="servicios" className="servicios">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Nuestros Servicios</h2>
+          <h2 className="section-title">{t('servicios.title')}</h2>
           <div className="title-underline"></div>
-          <p className="section-intro">
-            En Dentisur ofrecemos una amplia gama de servicios odontológicos de alta calidad, 
-            utilizando tecnología avanzada y técnicas modernas para garantizar los mejores resultados.
-          </p>
+          <p className="section-intro">{t('servicios.intro')}</p>
         </div>
 
         <div className="servicios-grid">
@@ -79,11 +36,11 @@ const Servicios = () => {
             return (
               <Link key={servicio.id} href={linkHref} className="servicio-card" prefetch={false}>
                 <div className="servicio-image-container">
-                  <img src={typeof servicio.image === 'string' ? servicio.image : (servicio.image?.src || '')} alt={servicio.title} className="servicio-image" />
+                  <img src={typeof servicio.image === 'string' ? servicio.image : (servicio.image?.src || '')} alt={t(servicio.titleKey)} className="servicio-image" />
                 </div>
                 <div className="servicio-content">
-                  <h3 className="servicio-title">{servicio.title}</h3>
-                  <p className="servicio-description">{servicio.description}</p>
+                  <h3 className="servicio-title">{t(servicio.titleKey)}</h3>
+                  <p className="servicio-description">{t(servicio.descKey)}</p>
                 </div>
               </Link>
             )
@@ -91,8 +48,8 @@ const Servicios = () => {
         </div>
 
         <section className="cta-section">
-          <h3>¿Listo para comenzar tu tratamiento?</h3>
-          <p>Agenda una consulta con nuestros especialistas</p>
+          <h3>{t('servicios.ctaTitle')}</h3>
+          <p>{t('servicios.ctaSub')}</p>
           <div className="cta-buttons">
             <a
               href="https://wa.me/573193997118?text=Hola,%20me%20gustaría%20agendar%20una%20consulta"
@@ -100,10 +57,10 @@ const Servicios = () => {
               rel="noopener noreferrer"
               className="cta-button"
             >
-              Agendar por WhatsApp
+              {t('servicios.ctaWhatsApp')}
             </a>
             <Link href="/agendar-cita" className="cta-button cta-button-secondary">
-              Solicitar cita por formulario
+              {t('servicios.ctaForm')}
             </Link>
           </div>
         </section>

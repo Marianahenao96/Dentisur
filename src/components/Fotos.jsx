@@ -1,9 +1,11 @@
 import React from 'react'
+import { useLanguage } from '../context/LanguageContext'
 import consultorioImg from '../assets/images/consultorio.jpeg'
 import consultorio1Img from '../assets/images/consultorio1.jpeg'
 import consultorio2Img from '../assets/images/consultorio2.jpeg'
 
 const Fotos = () => {
+  const { t } = useLanguage()
   const fotos = [
     { id: 1, url: consultorioImg, title: 'Consultorio' },
     { id: 2, url: consultorio1Img, title: 'Consultorio' },
@@ -14,12 +16,9 @@ const Fotos = () => {
     <section id="fotos" className="fotos">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Nuestras Instalaciones</h2>
+          <h2 className="section-title">{t('fotos.title')}</h2>
           <div className="title-underline"></div>
-          <p className="section-intro">
-            Conoce nuestras modernas instalaciones equipadas con tecnología de última generación 
-            para brindarte la mejor experiencia en atención odontológica.
-          </p>
+          <p className="section-intro">{t('fotos.intro')}</p>
         </div>
 
         <div className="fotos-grid">
@@ -37,7 +36,7 @@ const Fotos = () => {
                   }}
                 />
                 <div className="foto-overlay">
-                  <h4 className="foto-title">{foto.title}</h4>
+                  <h4 className="foto-title">{t('fotos.consultorio')}</h4>
                 </div>
               </div>
             </div>
